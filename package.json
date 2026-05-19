@@ -7,13 +7,12 @@
   "scripts": {
     "build": "npm run build:types && npm run build:browser",
     "build:types": "tsc -p tsconfig.json",
-    "build:browser": "esbuild src/browser.ts --bundle --format=iife --global-name=QueryLogger --platform=browser --target=es2018 --outfile=dist/query-logger.js",
-    "demo": "npm run build:browser && node demo/server.mjs",
-    "test": "npm run build:types && node test/smoke-test.mjs"
+    "build:browser": "bun build src/browser.ts --bundle --format iife --target browser --outfile dist/query-logger.js",
+    "demo": "npm run build:browser && bun run demo/server.mjs",
+    "test": "npm run build:types && bun run test/smoke-test.mjs"
   },
   "dependencies": {},
   "devDependencies": {
-    "esbuild": "^0.25.5",
     "typescript": "^5.5.3"
   },
   "private": true
