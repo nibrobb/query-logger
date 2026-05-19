@@ -1,0 +1,20 @@
+{
+  "name": "querylogger",
+  "version": "1.0.0",
+  "description": "Modular browser query logger with demo integration",
+  "main": "dist/esm/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:types && npm run build:browser",
+    "build:types": "tsc -p tsconfig.json",
+    "build:browser": "esbuild src/browser.ts --bundle --format=iife --global-name=QueryLogger --platform=browser --target=es2018 --outfile=dist/query-logger.js",
+    "demo": "npm run build:browser && node demo/server.mjs",
+    "test": "npm run build:types && node test/smoke-test.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.25.5",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
