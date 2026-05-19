@@ -1,4 +1,4 @@
-export type QueryLoggerEventType = 'search_results' | 'result_click';
+export type QueryLoggerEventType = "search_results" | "result_click";
 
 export interface QueryLoggerEvent {
   eventType: QueryLoggerEventType;
@@ -48,4 +48,3 @@ export interface TrackResultClickPayload {
   actionSource?: string;
   metadata?: Record<string, unknown>;
 }
-

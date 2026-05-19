@@ -34,14 +34,14 @@ Include it on your site:
 <script src="/dist/query-logger.js"></script>
 <script>
   const logger = QueryLogger.createQueryLogger({
-    siteId: 'my-site',
-    endpoint: '/api/query-logs',
+    siteId: "my-site",
+    endpoint: "/api/query-logs",
   });
 
   QueryLogger.attachHeaderSearch(logger, {
-    formSelector: '#header-search',
-    inputSelector: '#query-input',
-    resultsContainerSelector: '#results',
+    formSelector: "#header-search",
+    inputSelector: "#query-input",
+    resultsContainerSelector: "#results",
     performSearch: async (query) => {
       const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
       const data = await response.json();
@@ -64,6 +64,7 @@ npm run demo
 Open `http://localhost:8080`.
 
 The demo includes:
+
 - Header search box
 - Mock search API
 - Log ingestion API
@@ -74,4 +75,18 @@ The demo includes:
 ```bash
 npm install
 npm test
+```
+
+## Lint and format
+
+```bash
+npm install
+npm run lint
+npm run format
+```
+
+Auto-fix lint issues:
+
+```bash
+npm run lint:fix
 ```

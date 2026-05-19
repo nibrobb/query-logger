@@ -9,10 +9,19 @@
     "build:types": "tsc -p tsconfig.json",
     "build:browser": "bun build src/browser.ts --bundle --format iife --target browser --outfile dist/query-logger.js",
     "demo": "npm run build:browser && bun run demo/server.mjs",
-    "test": "npm run build:types && bun run test/smoke-test.mjs"
+    "test": "npm run build:types && bun run test/smoke-test.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {},
   "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.32.1",
     "typescript": "^5.5.3"
   },
   "private": true

@@ -1,4 +1,4 @@
-import { QueryLogger } from './queryLogger.js';
+import { QueryLogger } from "./queryLogger.js";
 
 export interface HeaderSearchAdapterConfig {
   formSelector: string;
@@ -15,7 +15,7 @@ export interface HeaderSearchAdapterHandle {
 
 const getInputValue = (form: HTMLFormElement, selector: string): string => {
   const input = form.querySelector<HTMLInputElement>(selector);
-  return input?.value.trim() ?? '';
+  return input?.value.trim() ?? "";
 };
 
 export const attachHeaderSearch = (
@@ -33,7 +33,7 @@ export const attachHeaderSearch = (
     throw new Error(`Results container not found: ${config.resultsContainerSelector}`);
   }
 
-  const resultItemSelector = config.resultItemSelector ?? '[data-result-id]';
+  const resultItemSelector = config.resultItemSelector ?? "[data-result-id]";
 
   const onSubmit = async (event: Event): Promise<void> => {
     event.preventDefault();
@@ -47,7 +47,7 @@ export const attachHeaderSearch = (
     logger.trackSearch({
       query,
       resultIds,
-      actionSource: 'header_submit',
+      actionSource: "header_submit",
     });
 
     config.onResults?.(resultIds, query);
@@ -63,18 +63,17 @@ export const attachHeaderSearch = (
 
     logger.trackResultClick({
       resultId,
-      actionSource: 'result_row_click',
+      actionSource: "result_row_click",
     });
   };
 
-  form.addEventListener('submit', onSubmit);
-  resultsContainer.addEventListener('click', onClick);
+  form.addEventListener("submit", onSubmit);
+  resultsContainer.addEventListener("click", onClick);
 
   return {
     detach: () => {
-      form.removeEventListener('submit', onSubmit);
-      resultsContainer.removeEventListener('click', onClick);
+      form.removeEventListener("submit", onSubmit);
+      resultsContainer.removeEventListener("click", onClick);
     },
   };
 };
-

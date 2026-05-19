@@ -1,7 +1,7 @@
 (() => {
-  const resultsElement = document.getElementById('results');
-  const formElement = document.getElementById('header-search');
-  const inputElement = document.getElementById('query-input');
+  const resultsElement = document.getElementById("results");
+  const formElement = document.getElementById("header-search");
+  const inputElement = document.getElementById("query-input");
   const DEBOUNCE_MS = 200;
   let debounceTimer;
   let requestSequence = 0;
@@ -12,27 +12,30 @@
     }
 
     resultsElement.innerHTML = results
-      .map((item) => `<li data-result-id="${item.id}"><a href="#result-${item.id}">${item.name}</a></li>`)
-      .join('');
+      .map(
+        (item) =>
+          `<li data-result-id="${item.id}"><a href="#result-${item.id}">${item.name}</a></li>`,
+      )
+      .join("");
   };
 
   const logger = QueryLogger.createQueryLogger({
-    siteId: 'demo-site',
-    endpoint: '/api/query-logs',
+    siteId: "demo-site",
+    endpoint: "/api/query-logs",
     flushIntervalMs: 1500,
     metadata: {
-      environment: 'demo',
+      environment: "demo",
     },
     onError: (error) => {
-      console.error('Query logger error', error);
+      console.error("Query logger error", error);
     },
   });
 
   QueryLogger.attachHeaderSearch(logger, {
-    formSelector: '#header-search',
-    inputSelector: '#query-input',
-    resultsContainerSelector: '#results',
-    resultItemSelector: '[data-result-id]',
+    formSelector: "#header-search",
+    inputSelector: "#query-input",
+    resultsContainerSelector: "#results",
+    resultItemSelector: "[data-result-id]",
     performSearch: async (query) => {
       const currentRequest = ++requestSequence;
       const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
@@ -65,5 +68,5 @@
     }, DEBOUNCE_MS);
   };
 
-  inputElement?.addEventListener('input', triggerIncrementalSearch);
+  inputElement?.addEventListener("input", triggerIncrementalSearch);
 })();

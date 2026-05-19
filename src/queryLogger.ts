@@ -5,12 +5,12 @@ import {
   QueryLoggerTransport,
   TrackResultClickPayload,
   TrackSearchPayload,
-} from './types.js';
-import { createFetchTransport } from './transports.js';
+} from "./types.js";
+import { createFetchTransport } from "./transports.js";
 
 const DEFAULT_FLUSH_INTERVAL_MS = 5000;
 const DEFAULT_MAX_BATCH_SIZE = 10;
-const DEFAULT_SESSION_STORAGE_KEY = 'query-logger-session-id';
+const DEFAULT_SESSION_STORAGE_KEY = "query-logger-session-id";
 
 const createSessionId = (): string => {
   const random = Math.random().toString(16).slice(2);
@@ -18,7 +18,7 @@ const createSessionId = (): string => {
 };
 
 const getSessionId = (storageKey: string): string => {
-  if (typeof window === 'undefined' || !window.sessionStorage) {
+  if (typeof window === "undefined" || !window.sessionStorage) {
     return createSessionId();
   }
 
@@ -41,9 +41,9 @@ const normalizeIds = (ids: string[] | undefined): string[] => {
 };
 
 type NormalizedConfig = Required<
-  Pick<QueryLoggerConfig, 'flushIntervalMs' | 'maxBatchSize' | 'sessionStorageKey'>
+  Pick<QueryLoggerConfig, "flushIntervalMs" | "maxBatchSize" | "sessionStorageKey">
 > &
-  Omit<QueryLoggerConfig, 'flushIntervalMs' | 'maxBatchSize' | 'sessionStorageKey'>;
+  Omit<QueryLoggerConfig, "flushIntervalMs" | "maxBatchSize" | "sessionStorageKey">;
 
 export class QueryLogger {
   private readonly config: NormalizedConfig;
@@ -80,11 +80,11 @@ export class QueryLogger {
     this.lastSearchContext = { query, resultIds };
 
     this.queueEvent({
-      eventType: 'search_results',
+      eventType: "search_results",
       query,
       resultIds,
       clickedResultId: null,
-      actionSource: payload.actionSource ?? 'search_submit',
+      actionSource: payload.actionSource ?? "search_submit",
       metadata: payload.metadata,
     });
   }
@@ -98,11 +98,11 @@ export class QueryLogger {
     const resultIds = normalizeIds(payload.resultIds ?? this.lastSearchContext?.resultIds);
 
     this.queueEvent({
-      eventType: 'result_click',
+      eventType: "result_click",
       query: contextQuery,
       resultIds,
       clickedResultId: String(payload.resultId),
-      actionSource: payload.actionSource ?? 'result_click',
+      actionSource: payload.actionSource ?? "result_click",
       metadata: payload.metadata,
     });
   }
@@ -140,14 +140,14 @@ export class QueryLogger {
   }
 
   private queueEvent(
-    event: Omit<QueryLoggerEvent, 'sessionId' | 'siteId' | 'pageUrl' | 'userAgent' | 'timestamp'>,
+    event: Omit<QueryLoggerEvent, "sessionId" | "siteId" | "pageUrl" | "userAgent" | "timestamp">,
   ): void {
     const fullEvent: QueryLoggerEvent = {
       ...event,
       sessionId: this.sessionId,
       siteId: this.config.siteId,
-      pageUrl: typeof window === 'undefined' ? 'server' : window.location.href,
-      userAgent: typeof navigator === 'undefined' ? 'unknown' : navigator.userAgent,
+      pageUrl: typeof window === "undefined" ? "server" : window.location.href,
+      userAgent: typeof navigator === "undefined" ? "unknown" : navigator.userAgent,
       timestamp: new Date().toISOString(),
       metadata: {
         ...this.config.metadata,
@@ -165,5 +165,3 @@ export class QueryLogger {
 export const createQueryLogger = (config: QueryLoggerConfig): QueryLogger => {
   return new QueryLogger(config);
 };
-
-

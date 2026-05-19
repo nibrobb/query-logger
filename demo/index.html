@@ -5,17 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Query Logger Demo</title>
     <style>
-      body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fa; }
-      header { background: #111827; color: #fff; padding: 14px 20px; }
-      .search { display: flex; gap: 8px; max-width: 640px; }
-      input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #d1d5db; }
-      button { padding: 10px 14px; border: 0; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; }
-      main { margin: 24px auto; max-width: 760px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; }
-      #results { list-style: none; margin: 0; padding: 0; }
-      #results li { padding: 10px; border-bottom: 1px solid #f0f0f0; }
-      #results li:last-child { border-bottom: none; }
-      #results a { color: #0f172a; text-decoration: none; display: block; }
-      .hint { color: #64748b; font-size: 14px; }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+      }
+      header {
+        background: #111827;
+        color: #fff;
+        padding: 14px 20px;
+      }
+      .search {
+        display: flex;
+        gap: 8px;
+        max-width: 640px;
+      }
+      input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+      }
+      button {
+        padding: 10px 14px;
+        border: 0;
+        border-radius: 6px;
+        background: #2563eb;
+        color: #fff;
+        cursor: pointer;
+      }
+      main {
+        margin: 24px auto;
+        max-width: 760px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+      }
+      #results {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      #results li {
+        padding: 10px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      #results li:last-child {
+        border-bottom: none;
+      }
+      #results a {
+        color: #0f172a;
+        text-decoration: none;
+        display: block;
+      }
+      .hint {
+        color: #64748b;
+        font-size: 14px;
+      }
     </style>
   </head>
   <body>
@@ -26,7 +73,10 @@
       </form>
     </header>
     <main>
-      <p class="hint">Submit a search, then click one result. The logger sends query + result IDs + clicked result ID.</p>
+      <p class="hint">
+        Submit a search, then click one result. The logger sends query + result IDs + clicked result
+        ID.
+      </p>
       <ul id="results"></ul>
     </main>
     <script src="/dist/query-logger.js"></script>
